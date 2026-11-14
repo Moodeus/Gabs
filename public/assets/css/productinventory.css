@@ -1,0 +1,57 @@
+body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; color: #333; line-height: 1.6; }
+* { box-sizing: border-box; }
+.page-content { max-width: 1400px; width: 95%; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); }
+
+.header-bar { background-color: #ffc72c; display: flex; align-items: stretch; box-shadow: 0 2px 4px rgba(0,0,0,0.1); min-height: 60px; position: relative; }
+.logo-container { background-color: #fff; display: flex; align-items: center; padding: 0 15px; min-width: 180px; flex-shrink: 0; }
+.logo-container h1 { color: #ffc72c; font-size: 24px; margin: 0; white-space: nowrap; }
+.logo-container h1 span { color: #c0392b; }
+.navbar { flex-grow: 1; display: flex; align-items: stretch; padding: 0 10px; }
+.main-nav { display: flex; align-items: stretch; width: 100%; }
+.hamburger { display: none; background: none; border: none; font-size: 24px; cursor: pointer; padding: 0 15px; color: #333; margin-left: auto; align-self: center; width: auto; }
+.navbar a { color: #333; text-align: center; padding: 0 12px; text-decoration: none; font-size: 16px; display: flex; align-items: center; font-weight: bold; transition: background-color 0.3s; white-space: nowrap; }
+.navbar a:hover:not(.logout-link) { background-color: rgba(0, 0, 0, 0.05); }
+.navbar a.active { background-color: #fff; color: #333; }
+.logout-link { margin-left: auto; background-color: #c0392b; color: white !important; padding: 0 15px; border-radius: 4px; align-self: center; height: 38px; line-height: 38px; font-weight: bold; font-size: 16px; text-decoration: none; }
+.logout-link:hover { background-color: #e74c3c; }
+
+h1, h2, h3 { color: #333; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-top: 25px; margin-bottom: 15px; }
+h1 { font-size: 1.8em; } h2 { font-size: 1.5em; } h3 { font-size: 1.2em; }
+.message { padding: 12px 15px; margin: 15px 0; border-radius: 5px; border: 1px solid transparent; }
+.message.success { background: #dff0d8; border-color: #d6e9c6; color: #3c763d; }
+.message.error { background: #f2dede; border-color: #ebccd1; color: #a94442; }
+
+.sub-nav { margin-bottom: 20px; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
+.sub-nav a { display: inline-block; padding: 10px 15px; text-decoration: none; color: #333; font-weight: bold; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+.sub-nav a.active-tab { border-bottom-color: #f2a154; color: #f2a154; }
+
+.table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 20px; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; min-width: 800px; }
+table, th, td { border: 1px solid #ccc; }
+th, td { padding: 10px 12px; text-align: center; vertical-align: top; }
+th { background-color: #f2a154; color: white; white-space: nowrap; }
+tr:nth-child(even) { background: #f9f9f9; }
+td:first-child { text-align: left; }
+
+.action-cell { min-width: 250px; }
+.recipe-list { text-align: left; padding: 5px; font-size: 0.9em; }
+.recipe-list-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #eee; padding: 2px 0; }
+.recipe-remove-btn { background: #f00; color: #fff; font-size: 0.8em; padding: 2px 5px; border: none; border-radius: 3px; cursor: pointer; width: auto; }
+
+.page-content form { display: block; margin-bottom: 5px; }
+.page-content input[type="text"],
+.page-content input[type="number"],
+.page-content select { padding: 5px; margin: 3px; border: 1px solid #ddd; width: 100%; box-sizing: border-box; }
+.page-content .action-cell button,
+.page-content form button[type="submit"] { padding: 6px 12px; background: #333; color: white; border: none; border-radius: 3px; cursor: pointer; width: 100%; box-sizing: border-box; font-weight: bold; }
+
+@media (max-width: 768px) {
+    .header-bar { flex-wrap: nowrap; }
+    .navbar { position: relative; }
+    .hamburger { display: block; }
+    .logout-link { display: none; }
+    .main-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background-color: #ffda63; flex-direction: column; width: 100%; z-index: 100; }
+    .main-nav.show-menu { display: flex; }
+    .main-nav a { width: 100%; padding: 12px 20px; }
+    .main-nav a.logout-link { display: flex !important; background-color: #c0392b !important; margin-left: 0; border-radius: 0; }
+}

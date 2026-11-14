@@ -1,0 +1,1271 @@
+/* Gab's Bakeshop brand logo */
+.header-bar .logo-container {
+    width: fit-content;
+    min-width: 0;
+    padding: 4px 8px;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.logo-container .brand-logo {
+    height: 42px;
+    width: auto;
+    max-width: none;
+    display: block;
+    object-fit: contain;
+}
+
+.login-box .logo {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 0;
+}
+
+.login-box .logo .brand-logo {
+    max-width: 200px;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 480px) {
+    .header-bar .logo-container {
+        padding: 4px 6px;
+    }
+
+    .logo-container .brand-logo {
+        height: 34px;
+    }
+
+    .login-box .logo .brand-logo {
+        max-width: 160px;
+    }
+}
+
+/* Sub-navbar: a persistent strip below the main navbar for the current
+   section (Inventory: Ingredient/Product Inventory; Reports: Sales Report,
+   Ingredient/Product Audit, Delivery Receipts). */
+.sub-navbar {
+    display: flex;
+    align-items: stretch;
+    background-color: #fff3d6;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0 16px;
+    overflow-x: auto;
+}
+
+.sub-navbar a {
+    padding: 10px 16px;
+    color: #555;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+}
+
+.sub-navbar a:hover {
+    color: #333;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.sub-navbar a.active {
+    color: #333;
+    border-bottom-color: #ffc72c;
+}
+
+@media (max-width: 480px) {
+    .sub-navbar a {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
+
+/* "Add ..." modals (Ingredient Inventory, Product Inventory, etc.) */
+.page-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.page-header-row h1 {
+    margin: 0;
+}
+
+.page-header-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Canonical .dashboard-content / .dashboard-section / .stat-*: only
+   welcome.css (the Dashboard's own stylesheet) ever defined these, so
+   every other page using this same markup (Sales Report, Ingredient/
+   Product Audit, Delivery Receipts) rendered them completely unstyled.
+   Defined here so they work everywhere, matching .recent-table's setup. */
+.dashboard-section {
+    text-align: left;
+    margin: 28px 0;
+}
+
+.dashboard-section h2 {
+    font-size: 1.3em;
+    border-bottom: 2px solid #ffdd99;
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+    text-align: center;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #eee;
+    background: #fafafa;
+    transition: transform 0.15s, box-shadow 0.15s;
+    min-height: 100px;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.stat-value {
+    font-size: 1.8em;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.stat-warning { border-left: 4px solid #f0ad4e; }
+.stat-warning .stat-value { color: #e67e22; }
+.stat-info { border-left: 4px solid #5bc0de; }
+.stat-info .stat-value { color: #2980b9; }
+.stat-success { border-left: 4px solid #5cb85c; }
+.stat-success .stat-value { color: #27ae60; }
+.stat-danger { border-left: 4px solid #d9534f; }
+.stat-danger .stat-value { color: #c0392b; }
+.stat-accent { border-left: 4px solid #ffc72c; }
+.stat-accent .stat-value { color: #d88e49; }
+.stat-neutral { border-left: 4px solid #95a5a6; }
+.stat-neutral .stat-value { color: #555; }
+
+/* Some legacy page stylesheets (accounts.css) define their own `.modal`
+   for an old div-based popup: unconditional `display: none`, plus
+   position/inset/size/background meant for a full-viewport overlay.
+   Since it shares our <dialog class="modal">'s class name, every one of
+   those properties needs reasserting here at higher specificity so this
+   page's own stylesheet can't collapse or reshape the dialog. */
+dialog.modal[open] {
+    display: block;
+}
+
+dialog.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+    width: min(480px, 92vw);
+    /* A modal <dialog> defaults to `inset: 0`; with `top: 50%` above, the
+       still-pinned bottom edge stretched every modal to half the screen
+       height regardless of its content. Release it so height fits content. */
+    bottom: auto;
+    height: fit-content;
+    max-height: 90vh;
+    overflow: hidden;
+    background: #fff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+dialog.modal.modal-lg {
+    width: min(640px, 94vw);
+}
+
+dialog.modal::backdrop {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+/* A modal stays put: the page behind it can't scroll while one is open, and
+   the modal itself never scrolls (overflow: hidden above). The one thing
+   inside a modal that does scroll is a list of items (recipe ingredients,
+   order items, the products in Place Order), capped so the modal's
+   header and buttons stay in view, with its header row pinned. */
+html:has(dialog[open]) {
+    overflow: hidden;
+}
+
+dialog.modal .recent-table-wrap {
+    max-height: max(120px, calc(100vh - 340px));
+    overflow-y: auto;
+}
+
+dialog.modal .order-detail-body .recent-table-wrap {
+    max-height: max(90px, calc((100vh - 380px) / 2));
+}
+
+/* Recipe Change modal: Old/New Recipe sit side by side instead of stacked,
+   so each table keeps the modal's full height budget instead of splitting
+   it, and nothing has to scroll past the other to compare them. */
+.recipe-diff-grid {
+    display: flex;
+    gap: 20px;
+}
+
+.recipe-diff-col {
+    flex: 1;
+    min-width: 0;
+}
+
+dialog.modal .recipe-diff-grid .recent-table-wrap {
+    max-height: max(120px, calc(100vh - 340px));
+}
+
+@media (max-width: 560px) {
+    .recipe-diff-grid {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+dialog.modal .recent-table-wrap th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Some page-specific stylesheets set a bare `table { min-width: ... }` for
+   their own full-width listing table; neutralize that inside modals so a
+   compact 2-column table (e.g. the recipe editor) doesn't inherit it and
+   get forced wider than the modal itself. */
+dialog.modal table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+}
+
+/* `.recent-table-wrap` is meant to give any table a horizontal-scroll
+   fallback; defined globally here so it works the same on every page
+   regardless of what that page's own stylesheet does or doesn't define. */
+.recent-table-wrap {
+    overflow-x: auto;
+}
+
+dialog.modal table th:last-child,
+dialog.modal table td:last-child {
+    width: 100px;
+}
+
+dialog.modal table td,
+dialog.modal table th {
+    overflow-wrap: break-word;
+}
+
+dialog.modal table input[type="number"],
+dialog.modal table input[type="text"] {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    dialog.modal table th:last-child,
+    dialog.modal table td:last-child {
+        width: 76px;
+    }
+
+    dialog.modal table th,
+    dialog.modal table td {
+        padding: 8px 6px;
+        font-size: 0.85em;
+    }
+}
+
+dialog.modal .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+dialog.modal .modal-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+dialog.modal .modal-close {
+    background: none;
+    border: none;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: #666;
+    padding: 4px 8px;
+}
+
+dialog.modal .modal-close:hover {
+    color: #333;
+}
+
+dialog.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 24px 24px;
+}
+
+.audit-remark-deleted,
+.audit-remark-created,
+.audit-remark-recipe {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.audit-remark-deleted {
+    background: #f2dede;
+    color: #a94442;
+}
+
+.audit-remark-created {
+    background: #dff0d8;
+    color: #3c763d;
+}
+
+.audit-remark-recipe {
+    background: #d9edf7;
+    color: #31708f;
+    margin-right: 6px;
+}
+
+/* Recipe-change remark on Product Audit: the whole pill is the button
+   that opens the Old Recipe -> New Recipe modal, instead of a separate
+   pill plus a long, wrapping diff line. */
+.audit-remark-recipe-btn {
+    border: none;
+    font: inherit;
+    cursor: pointer;
+}
+
+.audit-remark-recipe-btn:hover {
+    opacity: 0.85;
+}
+
+.recipe-section-title {
+    font-size: 0.85em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #8A8D91;
+    margin: 14px 0 6px;
+}
+
+.recipe-section-title:first-child {
+    margin-top: 0;
+}
+
+dialog.modal .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.search-bar {
+    margin-bottom: 14px;
+}
+
+.search-bar input[type="search"] {
+    width: 100%;
+    max-width: 320px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Dry/Wet radio filter above the Ingredient Inventory table */
+.type-filter {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+    font-size: 14px;
+}
+
+.type-filter label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+/* Unit display picker (g/kg/mg or mL/L/gal) above the Ingredient Inventory
+   table - display-only, converts the Stock column; which unit group shows
+   follows the Dry/Wet filter above it. */
+.unit-filter {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-bottom: 14px;
+    font-size: 14px;
+}
+
+.unit-filter-label {
+    color: #666;
+}
+
+.unit-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* `display: flex` above always wins over the browser's own `[hidden] {
+   display: none }` rule, since author CSS beats the UA stylesheet
+   regardless of specificity - these re-assert it so the `hidden`
+   attribute set by the ingredient inventory's JS actually hides them. */
+.unit-filter[hidden],
+.unit-group[hidden] {
+    display: none;
+}
+
+.unit-filter label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+/* Radio group inside the Add/Edit Ingredient modals */
+.radio-group {
+    display: flex;
+    gap: 16px;
+    margin-top: -6px;
+}
+
+.radio-group label {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.type-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.type-dry { background: #f1e4cf; color: #8a5a1e; }
+.type-wet { background: #d9edf7; color: #31708f; }
+
+/* Small "i" hint icon next to a confusing form field label - hover/focus
+   shows a plain-language explanation in a custom tooltip (drawn from
+   data-tooltip, not the native title attribute, so it appears instantly
+   and can be styled instead of waiting on the browser's own tooltip). */
+.info-icon {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #8A8D91;
+    color: #fff;
+    font-size: 10px;
+    font-style: italic;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', serif;
+    cursor: help;
+    margin-left: 2px;
+    vertical-align: middle;
+}
+
+.info-icon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: max-content;
+    max-width: min(240px, 80vw);
+    padding: 8px 10px;
+    background: #1F2124;
+    color: #fff;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1.4;
+    text-align: left;
+    white-space: normal;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.12s;
+    pointer-events: none;
+    z-index: 30;
+}
+
+.info-icon:hover::after,
+.info-icon:focus::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Canonical .recent-table / .status-pill / .quick-btn: some page-specific
+   stylesheets (e.g. orders.css) never defined these at all, others (e.g.
+   welcome.css) defined a different-looking version - since brand.css loads
+   on every page after the page's own stylesheet, this is the one version
+   that actually applies everywhere consistently, matching the Ingredient/
+   Product Inventory look (orange header, bordered + centered cells). */
+.recent-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+}
+
+.recent-table th,
+.recent-table td {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.recent-table td:first-child {
+    text-align: left;
+}
+
+.recent-table th {
+    background: #f2a154;
+    color: #fff;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.recent-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.status-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.status-pending { background: #d9edf7; color: #31708f; }
+.status-approved { background: #dff0d8; color: #3c763d; }
+.status-delivered { background: #d1ecf1; color: #0c5460; }
+.status-denied,
+.status-cancelled { background: #f2dede; color: #a94442; }
+.status-paid { background: #e2d9f3; color: #5a3d8a; }
+.status-needs-production { background: #a94442; color: #fff; margin-left: 6px; }
+
+/* Stock figure in the Ingredient/Product Inventory tables, once it's at
+   or below that row's own Low Stock Warning threshold. */
+.stock-low {
+    color: #a94442;
+    font-weight: bold;
+}
+
+.quick-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: #eee;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.quick-btn:hover { background: #e0e0e0; }
+
+.quick-btn-primary {
+    background: #ffc72c;
+    border-color: #e6b325;
+    color: #333;
+}
+
+.quick-btn-primary:hover { background: #ffda63; }
+
+.quick-btn-add { background: #dff0d8; border-color: #c8e0be; color: #3c763d; }
+.quick-btn-add:hover { background: #cbe6bf; }
+.quick-btn-minus { background: #f2dede; border-color: #ebccd1; color: #a94442; }
+.quick-btn-minus:hover { background: #ecc9c9; }
+
+/* Prev/Next pagination nav shared by Sales Report, Ingredient Audit,
+   Product Audit, and Delivery Receipts. */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.pagination-status {
+    font-size: 0.9em;
+    color: #55585C;
+}
+
+.quick-btn-disabled {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+/* Colored "bubble" action buttons - Approve/Deny/Paid on Orders */
+.btn-approve,
+.btn-deny,
+.btn-paid {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-weight: bold;
+    font-size: 0.9em;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.btn-approve:hover,
+.btn-deny:hover,
+.btn-paid:hover {
+    opacity: 0.85;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-approve { background: #5f8b4c; }
+.btn-deny { background: #c0392b; }
+.btn-paid { background: #6c4fa1; }
+
+/* Deny button on a single item inside the order's Items modal: smaller than
+   the order-level one so it fits a table row. */
+.btn-deny-item { padding: 6px 16px; }
+
+/* An item Admin denied from the batch: still listed, but greyed out and
+   struck through, with its "Denied" pill left readable. */
+.item-denied td { color: #999; text-decoration: line-through; }
+.item-denied .status-pill { text-decoration: none; }
+
+/* The Orders table's Action column: status-change button(s) and the
+   Invoice link sit side by side, not stacked - .inline-form is a <form>
+   (block-level by default), so it needs to be pulled inline here. Centered
+   and sized to match .btn-approve/.btn-deny/.btn-paid so every button in
+   the column is the same pill shape, regardless of which action it is. */
+.orders-action-cell {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 66px;
+}
+
+.orders-action-cell .inline-form {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.orders-action-cell .quick-btn {
+    padding: 10px 22px;
+    border-radius: 999px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.orders-action-cell .quick-btn:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Themed file picker (proof-of-delivery photo): the browser's own "Choose
+   File / No file chosen" control is hidden - kept in place but invisible so
+   the form's "required" check still points at it - and a normal button shows
+   in its place. Once a photo is picked the button turns green and shows the
+   file's name. */
+.file-pick {
+    position: relative;
+    max-width: 220px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.file-pick input[type="file"] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-pick-text {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-pick.file-pick-chosen {
+    background: #dff0d8;
+    border-color: #c8e0be;
+    color: #3c763d;
+}
+
+.file-pick.file-pick-chosen:hover { background: #cbe6bf; }
+
+/* Orders on phones: the wide table is replaced by a list of tappable
+   rows, each opening a modal with that order's fields laid out as
+   stacked label/value rows instead of table columns. */
+.mobile-order-list {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .orders-table-wrap {
+        display: none;
+    }
+
+    .mobile-order-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.mobile-order-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid #E6E7E9;
+    border-radius: 8px;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.mobile-order-row-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.mobile-order-row-sub {
+    font-size: 0.85em;
+    color: #8A8D91;
+}
+
+.mobile-order-row-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.order-detail-body {
+    padding: 16px 20px 20px;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-row > span:first-child {
+    color: #8A8D91;
+    font-weight: bold;
+    font-size: 0.85em;
+    white-space: nowrap;
+}
+
+.detail-row > span:last-child {
+    text-align: right;
+}
+
+.detail-row-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+/* Search box with a filter dropdown right beside it (Orders, Admin) */
+.search-filter-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.search-filter-row select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+}
+
+/* `.mobile-order-row { display: flex }` would otherwise beat the `hidden`
+   attribute the Orders filter sets on it. */
+.mobile-order-row[hidden] {
+    display: none;
+}
+
+/* Filter buttons above the audit trails and Delivery Receipts */
+.filter-tabs {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.audit-remark-added,
+.audit-remark-deducted,
+.audit-remark-order {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: bold;
+    margin-right: 6px;
+}
+
+.audit-remark-added { background: #dff0d8; color: #3c763d; }
+.audit-remark-deducted { background: #fcefdc; color: #a35a00; }
+.audit-remark-order { background: #e2d9f3; color: #5a3d8a; }
+
+/* Two filters side by side (Delivery Receipts: payment and branch) */
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+}
+
+.filter-tabs label {
+    font-size: 14px;
+    color: #666;
+}
+
+.filter-tabs select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+    min-width: 180px;
+}
+
+/* Place Order: a long product list. Shows up to 10 rows (about 46px each
+   plus the pinned header) before scrolling; on a shorter screen the list
+   gives up rows instead so the search box, notes and buttons stay in view. */
+dialog.modal#place-order-modal[open] {
+    display: flex;
+    flex-direction: column;
+}
+
+#place-order-modal form {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+#place-order-modal form > * {
+    flex-shrink: 0;
+}
+
+#place-order-modal form > .recent-table-wrap {
+    flex: 0 1 auto;
+    min-height: 0;
+    max-height: 510px;
+}
+
+/* Compact rows so about 10 fit without scrolling. */
+#place-order-table th,
+#place-order-table td {
+    padding: 5px 10px;
+}
+
+#place-order-table input[type="number"] {
+    margin: 0;
+    padding: 4px 6px;
+}
+
+/* With the tighter rows, 10 rows plus the header come to about 420px. The
+   modal may use a little more of the screen so they fit on a 720px-tall one. */
+dialog.modal#place-order-modal {
+    max-height: 96vh;
+}
+
+#place-order-modal form > .recent-table-wrap {
+    max-height: 420px;
+}
+
+/* Monthly/Yearly Sales charts (SVG, drawn by each page's own script) and
+   the "most ordered products" sideways bars - shared by the Dashboard's
+   Monthly Sales section and the Sales Report's Monthly/Yearly tabs. */
+.sales-chart-wrap { overflow-x: auto; }
+.sales-chart { display: block; width: 100%; min-width: 640px; height: auto; }
+.sc-grid { stroke: #e6e6e6; stroke-width: 1; }
+.sc-axis { stroke: #aaa; stroke-width: 1.2; }
+.sc-tick { font: 11px Arial, sans-serif; fill: #777; }
+.sc-hit { fill: rgba(255, 199, 44, 0); pointer-events: all; }
+.sc-month { cursor: pointer; outline: none; }
+.sc-month:hover .sc-hit { fill: rgba(255, 199, 44, 0.16); }
+.sc-month:focus-visible .sc-hit { fill: rgba(255, 199, 44, 0.16); stroke: #d88e49; stroke-width: 1.5; }
+.sc-bar { fill: #ffc72c; }
+.sc-top .sc-bar { fill: #d88e49; }
+.sc-month:hover .sc-bar { fill: #f0b400; }
+.sc-top:hover .sc-bar { fill: #c47a38; }
+.sc-value { font: 600 11px Arial, sans-serif; fill: #555; }
+.sc-month-label { font: bold 12px Arial, sans-serif; fill: #333; }
+.sc-year-label { font: 10px Arial, sans-serif; fill: #999; }
+
+/* Yearly Sales line chart (Sales Report's Yearly tab) */
+.sc-line { stroke: #d88e49; stroke-width: 2.5; }
+.sc-point { fill: #fff; stroke: #d88e49; stroke-width: 2.5; }
+.sc-axis-title { font: bold 12px Arial, sans-serif; fill: #666; }
+
+/* Sideways bars in the "most ordered products" modal */
+.hbar-list { margin-top: 10px; }
+.hbar-row { display: grid; grid-template-columns: 180px 1fr 104px; align-items: center; gap: 10px; margin: 9px 0; }
+.hbar-label { font-size: 0.92em; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hbar-track { background: #f1f1f1; border-radius: 4px; height: 18px; overflow: hidden; }
+.hbar-fill { background: #ffc72c; height: 100%; border-radius: 4px; min-width: 3px; }
+.hbar-first { background: #d88e49; }
+.hbar-value { font-size: 0.85em; color: #555; text-align: right; white-space: nowrap; }
+
+@media (max-width: 600px) {
+    .hbar-row { grid-template-columns: 110px 1fr 84px; gap: 8px; }
+}
+
+/* Year picker above the Monthly Sales chart */
+.sales-chart-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 12px 0 4px; }
+.sales-chart-nav select { padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; background: #fff; }
+.sales-chart-nav .quick-btn:disabled { opacity: 0.4; cursor: default; }
+.sales-year-label { color: #666; font-size: 14px; }
+.sales-year-total { margin-left: auto; font-weight: bold; color: #555; }
+
+/* Daily/Monthly/Yearly switcher on the Sales Report page */
+.report-view-picker { display: flex; align-items: center; gap: 10px; margin: 14px 0; flex-wrap: wrap; }
+.report-view-picker label { color: #666; font-size: 14px; }
+.report-view-picker select { padding: 8px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; background: #fff; font-weight: bold; }
+
+/* "Ingredient is in use" warning modal on Ingredient Inventory: the list of
+   products that need the ingredient. A list of items, so it may scroll. */
+.warning-text {
+    margin: 0;
+    color: #a94442;
+}
+
+.warning-list {
+    margin: 0;
+    padding: 10px 14px 10px 32px;
+    background: #fcf3f2;
+    border: 1px solid #ebccd1;
+    border-radius: 6px;
+    max-height: 180px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+/* A product name that opens its recipe (Product Inventory): a button that
+   looks like a link, so the whole row stays plain text until hovered. */
+.name-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+}
+
+.name-link:hover,
+.name-link:focus-visible {
+    text-decoration-style: solid;
+}
+
+/* Settings page: Profile and Password as two cards, side by side on wide
+   screens and stacked on narrow ones, with stacked labels and full-width
+   inputs instead of one long run-on row. */
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    align-items: start;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.settings-card {
+    border: 1px solid #e3e3e3;
+    border-radius: 10px;
+    padding: 20px 24px 24px;
+    background: #fff;
+}
+
+.settings-card h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    border-bottom: 2px solid #ffdd99;
+    padding-bottom: 8px;
+}
+
+.settings-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.settings-card label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-weight: bold;
+    color: #555;
+}
+
+.settings-card input[type="text"],
+.settings-card input[type="email"],
+.settings-card input[type="tel"],
+.settings-card input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: normal;
+}
+
+.settings-card button[type="submit"] {
+    align-self: flex-start;
+}
+
+.settings-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 0 0 18px;
+    padding: 12px 14px;
+    background: #faf8f4;
+    border-radius: 8px;
+}
+
+.settings-facts dt {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #8a7a68;
+}
+
+.settings-facts dd {
+    margin: 2px 0 0;
+    font-weight: bold;
+    word-break: break-word;
+}
+
+/* Export Sales Report modal: the date fields for the chosen period, and the
+   From/To pair side by side. [hidden] is restated because display rules on
+   these elements would otherwise override the attribute. */
+.export-field[hidden],
+#export-week-range[hidden],
+#export-error[hidden] {
+    display: none;
+}
+
+.export-range {
+    display: flex;
+    gap: 12px;
+}
+
+.export-range label {
+    flex: 1;
+}
+
+#export-error {
+    color: #a94442;
+    margin: 0;
+}
+
+/* A dashboard card for a page this user can't open: same look, but not
+   clickable, so it doesn't lift on hover as if it were a link. */
+.stat-card-static,
+.stat-card-static:hover {
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Search box and filter links above a searchable, paged list. */
+.list-search {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.list-search input[type="search"] {
+    flex: 1 1 240px;
+    max-width: 380px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Some page stylesheets (Product Inventory's, for one) style every form and
+   every submit button on the page - making them block-level, full-width and
+   dark. The extra specificity here keeps the search form looking the same
+   on every page: a compact yellow Search button next to the box. */
+.page-content form.list-search {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.page-content form.list-search button[type="submit"] {
+    width: auto;
+    padding: 8px 16px;
+    border: 1px solid #e6b325;
+    border-radius: 6px;
+    background: #ffc72c;
+    color: #333;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.page-content form.list-search button[type="submit"]:hover {
+    background: #ffda63;
+}
+
+.filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.filter-pill {
+    padding: 6px 14px;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    background: #fff;
+    color: #555;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.filter-pill:hover {
+    background: #f6f6f6;
+}
+
+.filter-pill.active {
+    background: #ffc72c;
+    border-color: #e6b325;
+    color: #333;
+}
+
+/* Live "new order" notice for Admins: a small notice at the bottom right that
+   waits until it is closed or used. */
+.live-toast {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 380px;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid #e6b325;
+    border-left: 5px solid #ffc72c;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    font-size: 0.92em;
+}
+
+.live-toast-go {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border: 1px solid #e6b325;
+    border-radius: 6px;
+    background: #ffc72c;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.live-toast-go:hover { background: #ffda63; }
+
+.live-toast-close {
+    flex-shrink: 0;
+    border: none;
+    background: none;
+    color: #777;
+    font-size: 1.3em;
+    line-height: 1;
+    cursor: pointer;
+}
